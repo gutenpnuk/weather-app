@@ -2,32 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const MainItem = styled.div`
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
-  -webkit-flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
-  border-bottom: 1px solid black;
-  margin: 0 10px 3px;
-`
-const Button = styled.button`
-  -webkit-flex-grow: 0, 9;
-  margin: 5px;
-`
-
-const TitlePlaceholder = styled.p`
-  -webkit-flex-grow: 1;
-  margin: 5px;
-  color: black;
-`
-
-const FavouriteItem = ({ fetchCity, woeid, fromFavourite, title }) => {
+const FavouriteItem = ({ woeid, fromFavourite, title }) => {
   return (
     <MainItem>
       <TitlePlaceholder>
-        <Link to="/city" onClick={() => fetchCity(woeid)}>
+        <Link className="Link" to={`/api/${woeid}`}>
           {title}
         </Link>
       </TitlePlaceholder>
@@ -35,5 +14,41 @@ const FavouriteItem = ({ fetchCity, woeid, fromFavourite, title }) => {
     </MainItem>
   )
 }
+
+const MainItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  border-bottom: 1px solid lightgray;
+  margin: 0 10px 3px;
+`
+const Button = styled.button`
+  flex-grow: 0, 9;
+  margin: 5px;
+  background: white
+  color: #333
+  margin: 7px;
+  padding: 1px 3px 2px 3px;
+  border: 1px solid #333;
+  border-radius: 2px;
+`
+
+const TitlePlaceholder = styled.p`
+  flex-grow: 1;
+  margin: 5px;
+
+  .Link {
+    text-decoration: none
+    color: #2374fc
+
+    :hover {
+      text-decoration: underline
+      color: #1751b2
+    }
+  }
+`
 
 export default FavouriteItem

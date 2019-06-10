@@ -1,33 +1,27 @@
 import { connect } from 'react-redux'
 import { CitiesList } from '../components'
+import { addToFavourite, fetchData, itemsFetchDataSuccess } from '../actions'
 import {
-  addToFavourite,
-  fetchCity,
-  fetchData,
-  itemsFetchDataSuccess,
-} from '../actions'
+  getIsLoading,
+  getHasErrored,
+  getItemsFromFavourite,
+} from '../selectors'
 
-const mapStateToProps = ({ items, isLoading, hasErrored, favouriteItems }) => {
+const mapStateToProps = state => {
   return {
-    items: items,
-    isLoading: isLoading,
-    hasErrored: hasErrored,
-    favouriteItems: favouriteItems,
+    items: getItemsFromFavourite(state),
+    isLoading: getIsLoading(state),
+    hasErrored: getHasErrored(state),
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
     toFavourite: (id, name) => {
       dispatch(addToFavourite({ woeid: id, title: name }))
     },
-    fetchCity: id => {
-      dispatch(fetchCity(id))
-    },
     fetchData: text => {
-      dispatch(fetchData(text))
-    },
-    nullFetch: () => {
-      dispatch(itemsFetchDataSuccess([]))
+      text ? dispatch(fetchData(text)) : dispatch(itemsFetchDataSuccess([]))
     },
   }
 }

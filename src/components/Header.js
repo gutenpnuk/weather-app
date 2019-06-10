@@ -2,33 +2,45 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Nav = styled.div`
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-`
+const Header = () => {
+  return (
+    <UL>
+      <LI>
+        <Link className="Link" to="/">
+          Home
+        </Link>
+      </LI>
+      <LI>
+        <Link className="Link" to="/favourite">
+          Favourite
+        </Link>
+      </LI>
+    </UL>
+  )
+}
 
-const P = styled.p`
-  padding: 10px;
-  color: black
-  :hover {
-    background-color: gray;
+const UL = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #999;
+  border-radius: 3px
+
+  .Link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none
+    :hover {
+      background-color: #111;
+    }
   }
 `
 
-const Header = () => {
-  return (
-    <Nav>
-      <Link to="/">
-        <P>Home</P>
-      </Link>
-      <Link to="/favourite">
-        <P>Favourite</P>
-      </Link>
-    </Nav>
-  )
-}
+const LI = styled.li`
+  float: left;
+`
 
 export default Header

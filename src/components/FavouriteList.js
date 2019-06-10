@@ -2,24 +2,11 @@ import React from 'react'
 import FavouriteItem from './FavouriteItem'
 import styled from 'styled-components'
 
-const Main = styled.div`
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-`
-
-const NameForm = styled.input`
-  margin: 20px;
-  width: 200px;
-`
-
-const FavouriteList = ({ setFilter, items, fromFavourite, fetchCity }) => {
+const FavouriteList = ({ setFilter, items, fromFavourite }) => {
   return (
     <Main>
       <NameForm
+        placeholder="Search"
         type="text"
         onChange={({ target: { value } }) => {
           setFilter(value)
@@ -31,11 +18,30 @@ const FavouriteList = ({ setFilter, items, fromFavourite, fetchCity }) => {
           key={item.woeid}
           {...item}
           fromFavourite={fromFavourite}
-          fetchCity={fetchCity}
         />
       ))}
     </Main>
   )
 }
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+`
+
+const NameForm = styled.input`
+  margin: 20px;
+  width: 200px;
+  height: 20px;
+  font-size: 10pt
+  border: 1px solid gray
+  border-radius: 2px
+  padding: 3px 10px
+`
 
 export default FavouriteList

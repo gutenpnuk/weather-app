@@ -1,8 +1,8 @@
 import { handleAction } from 'redux-actions'
-
 import { cityIsLoading, cityHasErrored, cityFetchDataSuccess, fetchCity } from '../actions'
+import {combineReducers} from 'redux'
 
-export const isCityLoading = handleAction(
+const isLoading = handleAction(
   cityIsLoading,
   (state, { payload }) => {
     return payload
@@ -10,7 +10,7 @@ export const isCityLoading = handleAction(
   false,
 )
 
-export const hasCityErrored = handleAction(
+const hasErrored = handleAction(
   cityHasErrored,
   (state, { payload }) => {
     return payload
@@ -18,7 +18,7 @@ export const hasCityErrored = handleAction(
   false,
 )
 
-export const cityToFetch = handleAction(
+const cityToFetch = handleAction(
   fetchCity,
   (state, {payload}) => {
     return payload
@@ -26,10 +26,19 @@ export const cityToFetch = handleAction(
   ''
 )
 
-export const city = handleAction(
+const city = handleAction(
   cityFetchDataSuccess,
   (state, { payload }) => {
     return payload
   },
   {},
 )
+
+const cityFetchData = combineReducers({
+  isLoading,
+  hasErrored,
+  cityToFetch,
+  city
+})
+
+export default cityFetchData

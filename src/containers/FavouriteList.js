@@ -1,21 +1,18 @@
 import { connect } from 'react-redux'
 import { FavouriteList } from '../components'
-import { removeFromFavourite, fetchCity, setFilter } from '../actions'
+import { removeFromFavourite, setFilter } from '../actions'
+import { getFilteredFavourites } from '../selectors'
 
-const mapStateToProps = ({ favouriteItems, activeFilter}) => {
+const mapStateToProps = state => {
   return {
-    items: favouriteItems.filter(item => {
-      return item.title.toLowerCase().includes(activeFilter)
-    }),
+    items: getFilteredFavourites(state),
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
     fromFavourite: id => {
       dispatch(removeFromFavourite(id))
-    },
-    fetchCity: id => {
-      dispatch(fetchCity(id))
     },
     setFilter: text => {
       dispatch(setFilter(text))

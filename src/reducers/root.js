@@ -1,19 +1,12 @@
 import { combineReducers } from 'redux'
-import { isLoading, hasErrored, items, favouriteItems, activeFilter } from './fetchData'
-import { Query } from './request'
-import { isCityLoading, hasCityErrored, city, cityToFetch } from './fetchCity'
+import itemsFetchData from './fetchData'
+import cityFetchData from './fetchCity'
+import favourite from './favouriteItems'
 
 const rootReducer = combineReducers({
-  isLoading,
-  hasErrored,
-  items,
-  Query,
-  favouriteItems,
-  isCityLoading,
-  hasCityErrored,
-  city,
-  cityToFetch,
-  activeFilter,
+  itemsFetchData,
+  cityFetchData,
+  favourite
 })
 
 export default rootReducer

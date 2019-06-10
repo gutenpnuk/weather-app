@@ -1,16 +1,20 @@
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import createSagaMiddleware from 'redux-saga'
-import { watchFetchData, watchFetchCity } from './sagas'
+import rootSaga from './sagas/root'
 
 import { getFavourite, setFavourite } from './repositories'
 import { addToFavourite, removeFromFavourite } from './actions'
+
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const favouriteItems = getFavourite()
 
 const localStorageFavourite = store => next => action => {
   let res = next(action)
-  const { favouriteItems } = store.getState()
+  const {
+    favourite: { favouriteItems },
+  } = store.getState()
   switch (action.type) {
     case addToFavourite.toString():
       return setFavourite(favouriteItems)
@@ -25,11 +29,10 @@ const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   rootReducer,
-  { favouriteItems },
-  applyMiddleware(localStorageFavourite, sagaMiddleware),
+  { favourite: { favouriteItems } },
+  composeWithDevTools(applyMiddleware(localStorageFavourite, sagaMiddleware)),
 )
 
-sagaMiddleware.run(watchFetchData)
-sagaMiddleware.run(watchFetchCity)
+sagaMiddleware.run(rootSaga)
 
 export default store

@@ -1,14 +1,13 @@
-import { handleAction, handleActions } from 'redux-actions'
+import { handleAction } from 'redux-actions'
 import {
+  fetchData,
   itemsIsLoading,
   itemsHasErrored,
   itemsFetchDataSuccess,
-  addToFavourite,
-  removeFromFavourite,
-  setFilter,
 } from '../actions'
+import { combineReducers } from 'redux'
 
-export const isLoading = handleAction(
+const isLoading = handleAction(
   itemsIsLoading,
   (state, { payload }) => {
     return payload
@@ -16,7 +15,7 @@ export const isLoading = handleAction(
   false,
 )
 
-export const hasErrored = handleAction(
+const hasErrored = handleAction(
   itemsHasErrored,
   (state, { payload }) => {
     return payload
@@ -24,7 +23,7 @@ export const hasErrored = handleAction(
   false,
 )
 
-export const items = handleAction(
+const items = handleAction(
   itemsFetchDataSuccess,
   (state, { payload }) => {
     return payload
@@ -32,25 +31,19 @@ export const items = handleAction(
   [],
 )
 
-export const favouriteItems = handleActions(
-  {
-    [addToFavourite]: (state, { payload }) => {
-      return [
-        ...state,
-        payload
-      ]
-    },
-    [removeFromFavourite]: (state, { payload }) => {
-      return state.filter(item => item.woeid !== payload)
-    },
-  },
-  [],
-)
-
-export const activeFilter = handleAction(
-  setFilter,
-  (state, {payload}) => {
+const query = handleAction(
+  fetchData,
+  (state, { payload }) => {
     return payload
   },
   '',
 )
+
+const itemsFetchData = combineReducers({
+  isLoading,
+  hasErrored,
+  items,
+  query,
+})
+
+export default itemsFetchData

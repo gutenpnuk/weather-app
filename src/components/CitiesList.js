@@ -2,37 +2,20 @@ import React from 'react'
 import CityItem from './CityItem'
 import styled from 'styled-components'
 
-const Main = styled.div`
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-`
-
-const NameForm = styled.input`
-  margin: 20px;
-  width: 200px;
-`
-
 const CitiesList = ({
-  nullFetch,
   fetchData,
   hasErrored,
   isLoading,
   items,
   toFavourite,
-  fetchCity,
   favouriteItems,
 }) => {
   return (
     <Main>
       <NameForm
+        placeholder="Search"
         type="text"
-        onChange={({ target: { value } }) => {
-          !value ? nullFetch() : fetchData(value)
-        }}
+        onChange={({ target: { value } }) => fetchData(value)}
       />
       {hasErrored ? (
         <p>Error</p>
@@ -44,7 +27,6 @@ const CitiesList = ({
             key={item.woeid}
             {...item}
             toFavourite={toFavourite}
-            fetchCity={fetchCity}
             favouriteItems={favouriteItems}
           />
         ))
@@ -52,5 +34,25 @@ const CitiesList = ({
     </Main>
   )
 }
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+`
+
+const NameForm = styled.input`
+  margin: 20px;
+  width: 200px;
+  height: 20px;
+  font-size: 10pt
+  border: 1px solid gray
+  border-radius: 2px
+  padding: 3px 10px
+`
 
 export default CitiesList
