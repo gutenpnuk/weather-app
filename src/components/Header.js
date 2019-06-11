@@ -2,23 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Header = () => {
-  return (
-    <UL>
-      <LI>
-        <Link className="Link" to="/">
-          Home
-        </Link>
-      </LI>
-      <LI>
-        <Link className="Link" to="/favourite">
-          Favourite
-        </Link>
-      </LI>
-    </UL>
-  )
-}
-
 const UL = styled.ul`
   list-style-type: none;
   margin: 0;
@@ -42,5 +25,22 @@ const UL = styled.ul`
 const LI = styled.li`
   float: left;
 `
+
+const Header = () => {
+  return (
+    <UL>
+      <LI>
+        <Link className="Link" to="/">
+          Home
+        </Link>
+      </LI>
+      <LI>
+        <Link className="Link" to="/favourite">
+          Favourite
+        </Link>
+      </LI>
+    </UL>
+  )
+}
 
 export default Header

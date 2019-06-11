@@ -2,19 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const FavouriteItem = ({ woeid, fromFavourite, title }) => {
-  return (
-    <MainItem>
-      <TitlePlaceholder>
-        <Link className="Link" to={`/api/${woeid}`}>
-          {title}
-        </Link>
-      </TitlePlaceholder>
-      <Button onClick={() => fromFavourite(woeid)}>From favourite</Button>
-    </MainItem>
-  )
-}
-
 const MainItem = styled.div`
   display: flex;
   flex-direction: row;
@@ -50,5 +37,18 @@ const TitlePlaceholder = styled.p`
     }
   }
 `
+
+const FavouriteItem = ({ woeid, fromFavourite, title }) => {
+  return (
+    <MainItem>
+      <TitlePlaceholder>
+        <Link className="Link" to={`/api/${woeid}`}>
+          {title}
+        </Link>
+      </TitlePlaceholder>
+      <Button onClick={() => fromFavourite(woeid)}>From favourite</Button>
+    </MainItem>
+  )
+}
 
 export default FavouriteItem

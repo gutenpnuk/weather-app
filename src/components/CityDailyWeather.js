@@ -1,6 +1,35 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin: 0 40px;
+  font-family: Arial, sans-serif;
+`
+
+const FlexImg = styled.div`
+  display: flex;
+  flex-direction: row;
+  .img {
+    margin-right: 10px;
+  }
+`
+
+const FlexWind = styled.div`
+  display: flex;
+  flex-direction: row;
+  .arrow {
+    margin-right: 10px;
+    transform: rotate(${props => props.theme.degs}deg);
+  }
+`
+
+const Title = styled.p`
+  color: #2374fc;
+`
+
 const CityDailyWeather = ({
   applicableDate,
   weatherStateAbbr,
@@ -34,34 +63,5 @@ const CityDailyWeather = ({
     </Main>
   )
 }
-
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  margin: 0 40px;
-  font-family: Arial, sans-serif;
-`
-
-const FlexImg = styled.div`
-  display: flex;
-  flex-direction: row;
-  .img {
-    margin-right: 10px;
-  }
-`
-
-const FlexWind = styled.div`
-  display: flex;
-  flex-direction: row;
-  .arrow {
-    margin-right: 10px;
-    transform: rotate(${props => props.theme.degs}deg);
-  }
-`
-
-const Title = styled.p`
-  color: #2374fc;
-`
 
 export default CityDailyWeather

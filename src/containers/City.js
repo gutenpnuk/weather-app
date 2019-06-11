@@ -1,28 +1,23 @@
 import { connect } from 'react-redux'
 import { City } from '../components'
 import {
-  getIsCityLoading,
-  getHasCityErrored,
-  getCity,
-  getConsolidatedWeather,
-} from '../selectors'
-import { fetchCity } from '../actions'
+  getIsWeatherLoading,
+  getHasWeatherErrored,
+  getWeatherData,
+  getConsolidatedWeather
+} from '../selectors/weather'
+import * as R from 'ramda'
+import { fetchWeather } from '../actions'
 
-const mapStateToProps = state => {
-  return {
-    isLoading: getIsCityLoading(state),
-    hasErrored: getHasCityErrored(state),
-    city: getCity(state),
-    weather: getConsolidatedWeather(state),
-  }
-}
+const mapStateToProps = R.applySpec({
+  isLoading: getIsWeatherLoading,
+  hasErrored: getHasWeatherErrored,
+  weatherData: getWeatherData,
+  weather: getConsolidatedWeather,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchCity: id => {
-      dispatch(fetchCity(id))
-    },
-  }
+const mapDispatchToProps = {
+  fetchWeather,
 }
 
 export default connect(

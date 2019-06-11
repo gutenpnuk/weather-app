@@ -1,29 +1,22 @@
 import { connect } from 'react-redux'
 import { CitiesList } from '../components'
-import { addToFavourite, fetchData, itemsFetchDataSuccess } from '../actions'
+import { addToFavourite, fetchCities } from '../actions'
+import * as R from 'ramda'
 import {
-  getIsLoading,
-  getHasErrored,
-  getItemsFromFavourite,
+  getIsCitiesLoading,
+  getHasCitiesErrored,
+  getCitiesFromFavourite,
 } from '../selectors'
 
-const mapStateToProps = state => {
-  return {
-    items: getItemsFromFavourite(state),
-    isLoading: getIsLoading(state),
-    hasErrored: getHasErrored(state),
-  }
-}
+const mapStateToProps = R.applySpec({
+  items: getCitiesFromFavourite,
+  isLoading: getIsCitiesLoading,
+  hasErrored: getHasCitiesErrored,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    toFavourite: (id, name) => {
-      dispatch(addToFavourite({ woeid: id, title: name }))
-    },
-    fetchData: text => {
-      text ? dispatch(fetchData(text)) : dispatch(itemsFetchDataSuccess([]))
-    },
-  }
+const mapDispatchToProps = {
+  addToFavourite,
+  fetchCities,
 }
 
 export default connect(

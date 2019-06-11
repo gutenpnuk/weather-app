@@ -2,21 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const CityItem = ({ woeid, title, toFavourite, isDisabled }) => {
-  return (
-    <MainItem>
-      <TitlePlaceholder>
-        <Link className="Link" to={`/api/${woeid}`}>
-          {title}
-        </Link>
-      </TitlePlaceholder>
-      <Button disabled={isDisabled} onClick={() => toFavourite(woeid, title)}>
-        To favourite
-      </Button>
-    </MainItem>
-  )
-}
-
 const MainItem = styled.div`
   display: flex;
   flex-direction: row;
@@ -57,5 +42,20 @@ const TitlePlaceholder = styled.p`
     }
   }
 `
+
+const CityItem = ({ woeid, title, toFavourite, isDisabled }) => {
+  return (
+    <MainItem>
+      <TitlePlaceholder>
+        <Link className="Link" to={`/api/${woeid}`}>
+          {title}
+        </Link>
+      </TitlePlaceholder>
+      <Button disabled={isDisabled} onClick={() => toFavourite({woeid, title})}>
+        To favourite
+      </Button>
+    </MainItem>
+  )
+}
 
 export default CityItem

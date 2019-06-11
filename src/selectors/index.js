@@ -1,19 +1,18 @@
-export { getFilteredFavourites } from './favourite'
 export {
-  getIsLoading,
-  getHasErrored,
-  getItems,
-  getQuery,
-  getItemsFromFavourite,
-} from './citiesList'
+  getIsCitiesLoading,
+  getHasCitiesErrored,
+  getCitiesList,
+  getCitiesQuery,
+  getCitiesFromFavourite,
+  getFilteredFavourites,
+  getFavouriteIsLoading,
+  getFavouriteHasErrored,
+} from './cities'
 
 export {
-  getIsCityLoading,
-  getHasCityErrored,
-  getCity,
-  getCityToFetch
-} from './cityItem'
-
-export {
-  getConsolidatedWeather
-} from './weatherData'
+  getIsWeatherLoading,
+  getHasWeatherErrored,
+  getWeatherData,
+  getWeatherQuery,
+  getConsolidatedWeather,
+} from './weather'

@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux'
-import itemsFetchData from './fetchData'
-import cityFetchData from './fetchCity'
-import favourite from './favouriteItems'
+import cities from './cities'
+import weather from './weather'
 
 const rootReducer = combineReducers({
-  itemsFetchData,
-  cityFetchData,
-  favourite
+  cities,
+  weather,
 })
 
 export default rootReducer

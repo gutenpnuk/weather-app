@@ -2,39 +2,6 @@ import React from 'react'
 import CityItem from './CityItem'
 import styled from 'styled-components'
 
-const CitiesList = ({
-  fetchData,
-  hasErrored,
-  isLoading,
-  items,
-  toFavourite,
-  favouriteItems,
-}) => {
-  return (
-    <Main>
-      <NameForm
-        placeholder="Search"
-        type="text"
-        onChange={({ target: { value } }) => fetchData(value)}
-      />
-      {hasErrored ? (
-        <p>Error</p>
-      ) : isLoading ? (
-        <p>Loading</p>
-      ) : (
-        items.map(item => (
-          <CityItem
-            key={item.woeid}
-            {...item}
-            toFavourite={toFavourite}
-            favouriteItems={favouriteItems}
-          />
-        ))
-      )}
-    </Main>
-  )
-}
-
 const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,5 +21,32 @@ const NameForm = styled.input`
   border-radius: 2px
   padding: 3px 10px
 `
+
+const CitiesList = ({
+  fetchCities,
+  hasErrored,
+  isLoading,
+  items,
+  addToFavourite,
+}) => {
+  return (
+    <Main>
+      <NameForm
+        placeholder="Search"
+        type="text"
+        onChange={({ target: { value } }) => fetchCities(value)}
+      />
+      {hasErrored ? (
+        <p>Error</p>
+      ) : isLoading ? (
+        <p>Loading</p>
+      ) : (
+        items.map(item => (
+          <CityItem key={item.woeid} {...item} toFavourite={addToFavourite} />
+        ))
+      )}
+    </Main>
+  )
+}
 
 export default CitiesList

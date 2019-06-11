@@ -1,4 +1,4 @@
-const getCityData = city =>
+const GetWeatherData = city =>
   fetch(`location/${city}/`)
     .then(res => {
       if (res.status >= 200 && res.status < 300) {
@@ -27,4 +27,4 @@ const getCityData = city =>
       }
     })
 
-export default getCityData
+export default GetWeatherData
