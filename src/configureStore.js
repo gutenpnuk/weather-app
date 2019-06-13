@@ -11,13 +11,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 const localStorageFavourite = store => next => action => {
   let res = next(action)
   const {
-    cities: { favouriteCitiesList },
+    cities: { favourites },
   } = store.getState()
   switch (action.type) {
     case addToFavourite.toString():
-      return setFavourite(favouriteCitiesList)
+      return setFavourite(favourites)
     case removeFromFavourite.toString():
-      return setFavourite(favouriteCitiesList)
+      return setFavourite(favourites)
     default:
       return res
   }

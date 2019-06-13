@@ -1,39 +1,69 @@
 import * as R from 'ramda'
 
-export const getIsCitiesLoading = state => state.cities.isLoading
+const getCities = R.prop('cities')
 
-export const getHasCitiesErrored = state => state.cities.hasErrored
+const getActiveFilter = R.pipe(
+  getCities,
+  R.prop('activeFilter'),
+  R.toLower,
+)
 
-export const getCitiesList = state => state.cities.citiesList
+export const getIsCitiesLoading = R.pipe(
+  getCities,
+  R.prop('isLoading'),
+)
 
-export const getCitiesQuery = state => state.cities.query
+export const getHasCitiesErrored = R.pipe(
+  getCities,
+  R.prop('hasErrored'),
+)
 
-export const getFavouriteItems = state => state.cities.favouriteCitiesList
+export const getAllCities = R.pipe(
+  getCities,
+  R.prop('all'),
+)
 
-export const getFavouriteIsLoading = state => state.cities.isFavouriteLoading
+export const getCitiesQuery = R.pipe(
+  getCities,
+  R.prop('query'),
+)
 
-export const getFavouriteHasErrored = state => state.cities.hasFavouriteErrored
+export const getFavourites = R.pipe(
+  getCities,
+  R.prop('favourites'),
+)
 
-const getActiveFilter = state => state.cities.activeFilter.toLowerCase()
+export const getFavouritesById = R.pipe(
+  getFavourites,
+  R.indexBy(R.prop('woeid')),
+)
 
-export const getFilteredFavourites = state => {
-  const isMatched = ({ title }) => {
-    return title.toLowerCase().includes(getActiveFilter(state))
-  }
-  return R.filter(isMatched, getFavouriteItems(state))
-}
+export const getFavouriteIsLoading = R.pipe(
+  getCities,
+  R.prop('isFavouriteLoading'),
+)
 
-export const getCitiesFromFavourite = state => {
-  const favs = getFavouriteItems(state)
-  const items = getCitiesList(state)
+export const getFavouriteHasErrored = R.pipe(
+  getCities,
+  R.prop('hasFavouriteErrored'),
+)
 
-  const isFavourite = item => {
-    const isEqual = favitem => {
-      return R.equals(favitem.woeid, item.woeid)
-    }
+export const getFilteredFavourites = R.converge(
+  (activeFilter, favourites) =>
+    R.filter(
+      R.pipe(
+        R.prop('title'),
+        R.toLower,
+        R.includes(activeFilter),
+      ),
+    )(favourites),
+  [getActiveFilter, getFavourites],
+)
 
-    return R.assoc('isDisabled', favs.some(isEqual), item)
-  }
-
-  return R.map(isFavourite, items)
-}
+export const getCitiesFromFavourite = R.converge(
+  (favouritesById, all) =>
+    R.map(item => R.assoc('isDisabled', !!favouritesById[item.woeid], item))(
+      all,
+    ),
+  [getFavouritesById, getAllCities],
+)

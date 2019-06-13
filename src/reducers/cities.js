@@ -29,7 +29,7 @@ const hasErrored = handleAction(
   false,
 )
 
-const citiesList = handleAction(
+const all = handleAction(
   citiesFetchDataSuccess,
   (state, { payload }) => {
     return payload
@@ -45,7 +45,7 @@ const query = handleAction(
   '',
 )
 
-const favouriteCitiesList = handleActions(
+const favourites = handleActions(
   {
     [addToFavourite]: (state, { payload }) => {
       return [...state, payload]
@@ -87,9 +87,9 @@ const activeFilter = handleAction(
 const cities = combineReducers({
   isLoading,
   hasErrored,
-  citiesList,
+  all,
   query,
-  favouriteCitiesList,
+  favourites,
   activeFilter,
   isFavouriteLoading,
   hasFavouriteErrored,

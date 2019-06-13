@@ -1,7 +1,7 @@
 export {
   getIsCitiesLoading,
   getHasCitiesErrored,
-  getCitiesList,
+  getAllCities,
   getCitiesQuery,
   getCitiesFromFavourite,
   getFilteredFavourites,
