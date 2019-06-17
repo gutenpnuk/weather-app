@@ -1,14 +1,14 @@
 import { handleAction } from 'redux-actions'
 import {
-  weatherIsLoading,
-  weatherHasErrored,
+  setWeatherLoading,
+  setWeatherErrored,
   weatherFetchDataSuccess,
   fetchWeather,
 } from '../actions'
 import { combineReducers } from 'redux'
 
 const isLoading = handleAction(
-  weatherIsLoading,
+  setWeatherLoading,
   (state, { payload }) => {
     return payload
   },
@@ -16,7 +16,7 @@ const isLoading = handleAction(
 )
 
 const hasErrored = handleAction(
-  weatherHasErrored,
+  setWeatherErrored,
   (state, { payload }) => {
     return payload
   },

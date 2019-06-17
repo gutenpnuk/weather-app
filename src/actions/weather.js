@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 
-export const weatherIsLoading = createAction('app/WEATHER_IS_LOADING')
-export const weatherHasErrored = createAction('app/WEATHER_HAS_ERRORED')
+export const setWeatherLoading = createAction('app/SET_WEATHER_LOADING')
+export const setWeatherErrored = createAction('app/SET_WEATHER_ERRORED')
 export const weatherFetchDataSuccess = createAction(
   'app/WEATHER_FETCH_DATA_SUCCESS',
 )

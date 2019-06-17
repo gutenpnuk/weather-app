@@ -2,19 +2,19 @@ import { handleAction, handleActions } from 'redux-actions'
 import { combineReducers } from 'redux'
 import {
   fetchCities,
-  citiesIsLoading,
-  citiesHasErrored,
+  setCitiesLoading,
+  setCitiesErrored,
   citiesFetchDataSuccess,
   addToFavourite,
   removeFromFavourite,
   setFilter,
   getFavourites,
-  favouriteIsLoading,
-  favouriteHasErrored,
+  setFavouriteLoading,
+  setFavouriteErrored,
 } from '../actions'
 
 const isLoading = handleAction(
-  citiesIsLoading,
+  setCitiesLoading,
   (state, { payload }) => {
     return payload
   },
@@ -22,7 +22,7 @@ const isLoading = handleAction(
 )
 
 const hasErrored = handleAction(
-  citiesHasErrored,
+  setCitiesErrored,
   (state, { payload }) => {
     return payload
   },
@@ -61,7 +61,7 @@ const favourites = handleActions(
 )
 
 const isFavouriteLoading = handleAction(
-  favouriteIsLoading,
+  setFavouriteLoading,
   (state, { payload }) => {
     return payload
   },
@@ -69,7 +69,7 @@ const isFavouriteLoading = handleAction(
 )
 
 const hasFavouriteErrored = handleAction(
-  favouriteHasErrored,
+  setFavouriteErrored,
   (state, { payload }) => {
     return payload
   },
