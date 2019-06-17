@@ -22,7 +22,6 @@ const Button = styled.button`
   border: 1px solid #333;
   border-radius: 2px;
 `
-
 const TitlePlaceholder = styled.p`
   flex-grow: 1;
   margin: 5px;

@@ -8,7 +8,6 @@ const Main = styled.div`
   margin: 0 40px;
   font-family: Arial, sans-serif;
 `
-
 const FlexImg = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,7 +15,6 @@ const FlexImg = styled.div`
     margin-right: 10px;
   }
 `
-
 const FlexWind = styled.div`
   display: flex;
   flex-direction: row;
@@ -25,7 +23,6 @@ const FlexWind = styled.div`
     transform: rotate(${props => props.theme.degs}deg);
   }
 `
-
 const Title = styled.p`
   color: #2374fc;
 `

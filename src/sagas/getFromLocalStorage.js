@@ -1,5 +1,5 @@
 import { getFavourite } from '../repositories'
-import { call, put, delay } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import {
   getFavourites,
   favouriteHasErrored,
@@ -12,7 +12,6 @@ export function* getFromLocalStorage() {
     const data = yield call(() => {
       return getFavourite()
     })
-    yield delay(2000)
     yield put(favouriteIsLoading(false))
     yield put(getFavourites(data))
   } catch (error) {
