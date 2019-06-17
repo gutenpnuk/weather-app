@@ -7,6 +7,7 @@ const Main = styled.div`
   align-items: left;
   margin: 0 40px;
   font-family: Arial, sans-serif;
+  flex-shrink: 15;
 `
 const FlexImg = styled.div`
   display: flex;

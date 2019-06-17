@@ -8,10 +8,9 @@ import styled from 'styled-components'
 
 const MainFlex = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 `
 
 function App() {

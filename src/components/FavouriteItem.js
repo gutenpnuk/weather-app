@@ -14,9 +14,8 @@ const MainItem = styled.div`
 `
 const Button = styled.button`
   flex-grow: 0, 9;
-  margin: 5px;
-  background: white
-  color: #333
+  background: white;
+  color: #333;
   margin: 7px;
   padding: 1px 3px 2px 3px;
   border: 1px solid #333;
@@ -27,12 +26,12 @@ const TitlePlaceholder = styled.p`
   margin: 5px;
 
   .Link {
-    text-decoration: none
-    color: #2374fc
+    text-decoration: none;
+    color: #2374fc;
 
     :hover {
-      text-decoration: underline
-      color: #1751b2
+      text-decoration: underline;
+      color: #1751b2;
     }
   }
 `

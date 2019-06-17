@@ -1,27 +1,27 @@
 import { takeEvery, put, call, select } from 'redux-saga/effects'
 import {
   fetchWeather,
-  weatherIsLoading,
-  weatherHasErrored,
+  setWeatherLoading,
+  setWeatherErrored,
   weatherFetchDataSuccess,
 } from '../actions'
 import { getWeatherQuery } from '../selectors'
 import { getWeatherData } from '../managers'
 
-export function* watchFetchCity() {
-  yield takeEvery(fetchWeather, fetchCityAsync)
+export function* watchFetchWeather() {
+  yield takeEvery(fetchWeather, fetchWeatherAsync)
 }
 
-function* fetchCityAsync() {
+function* fetchWeatherAsync() {
   try {
-    yield put(weatherIsLoading(true))
+    yield put(setWeatherLoading(true))
     const query = yield select(getWeatherQuery)
     const data = yield call(() => {
       return getWeatherData(query)
     })
-    yield put(weatherIsLoading(false))
+    yield put(setWeatherLoading(false))
     yield put(weatherFetchDataSuccess(data))
   } catch (error) {
-    yield put(weatherHasErrored(true))
+    yield put(setWeatherErrored(true))
   }
 }

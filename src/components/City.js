@@ -7,13 +7,13 @@ const Main = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin: 30px 5px
-  padding-bottom: 10px
-  border-bottom: 1px solid lightgray
+  margin: 30px 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
 `
 const Title = styled.p`
   margin-right: 30px;
-  color: #2374fc
+  color: #2374fc;
   font-family: Arial, sans-serif;
 `
 const Loader = styled.p`
