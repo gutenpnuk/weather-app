@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 
 const getWeather = R.prop('weather')
-const initConsolidatedWeather = () => []
+const initConsolidatedWeather = R.always([])
 
 export const getIsWeatherLoading = R.pipe(
   getWeather,

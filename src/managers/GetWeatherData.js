@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 
-const getWeatherData = R.pipeP(
+export const getWeatherData = R.pipeP(
   city => fetch(`location/${city}/`),
   res => res.json(),
   data => {
@@ -23,5 +23,3 @@ const getWeatherData = R.pipeP(
     }
   },
 )
-
-export default getWeatherData
