@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CityDailyWeather from './CityDailyWeather'
 import styled from 'styled-components'
+import * as R from 'ramda'
 
 const Main = styled.div`
   display: flex;
@@ -19,31 +20,32 @@ const Loader = styled.p`
   font-family: Arial, sans-serif;
 `
 
-class City extends React.Component {
-  constructor(props) {
-    super(props)
-    props.fetchWeather(props.match.params.id)
-  }
+const City = ({
+  weatherData,
+  hasErrored,
+  isLoading,
+  weather,
+  fetchWeather,
+  match,
+}) => {
+  useEffect(() => {
+    fetchWeather(match.params.id)
+  }, [fetchWeather, match.params.id])
 
-  render() {
-    const { weatherData, hasErrored, isLoading, weather } = this.props
-    return (
-      <div>
-        {hasErrored ? (
-          <Loader>Error</Loader>
-        ) : isLoading ? (
-          <Loader>Loading</Loader>
-        ) : (
-          <Main>
-            <Title>{weatherData.title}</Title>
-            {weather.map(item => (
-              <CityDailyWeather key={item.id} {...item} />
-            ))}
-          </Main>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {hasErrored ? (
+        <Loader>Error</Loader>
+      ) : isLoading ? (
+        <Loader>Loading</Loader>
+      ) : (
+        <Main>
+          <Title>{weatherData.title}</Title>
+          {R.map(item => <CityDailyWeather key={item.id} {...item} />)(weather)}
+        </Main>
+      )}
+    </div>
+  )
 }
 
 export default City
