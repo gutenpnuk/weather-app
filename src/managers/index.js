@@ -1,2 +1,2 @@
-export { default as GetWeatherData } from './GetWeatherData'
-export { default as GetCitiesList } from './GetCitiesList'
+export { default as getWeatherData } from './GetWeatherData'
+export { default as getCitiesList } from './GetCitiesList'

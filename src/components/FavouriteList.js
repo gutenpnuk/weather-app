@@ -1,6 +1,7 @@
 import React from 'react'
 import FavouriteItem from './FavouriteItem'
 import styled from 'styled-components'
+import * as R from 'ramda'
 
 const Main = styled.div`
   display: flex;
@@ -11,7 +12,6 @@ const Main = styled.div`
   margin-bottom: 15px;
   font-family: Arial, sans-serif;
 `
-
 const NameForm = styled.input`
   margin: 20px;
   width: 200px;
@@ -43,13 +43,13 @@ const FavouriteList = ({
       ) : isLoading ? (
         <p>Loading</p>
       ) : (
-        items.map(item => (
+        R.map(item => (
           <FavouriteItem
             key={item.woeid}
             {...item}
             fromFavourite={removeFromFavourite}
           />
-        ))
+        ))(items)
       )}
     </Main>
   )

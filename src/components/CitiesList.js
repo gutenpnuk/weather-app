@@ -1,6 +1,7 @@
 import React from 'react'
 import CityItem from './CityItem'
 import styled from 'styled-components'
+import * as R from 'ramda'
 
 const Main = styled.div`
   display: flex;
@@ -11,7 +12,6 @@ const Main = styled.div`
   margin-bottom: 15px;
   font-family: Arial, sans-serif;
 `
-
 const NameForm = styled.input`
   margin: 20px;
   width: 200px;
@@ -41,9 +41,9 @@ const CitiesList = ({
       ) : isLoading ? (
         <p>Loading</p>
       ) : (
-        items.map(item => (
+        R.map(item => (
           <CityItem key={item.woeid} {...item} toFavourite={addToFavourite} />
-        ))
+        ))(items)
       )}
     </Main>
   )

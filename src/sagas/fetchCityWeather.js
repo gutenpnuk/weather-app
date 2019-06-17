@@ -6,7 +6,7 @@ import {
   weatherFetchDataSuccess,
 } from '../actions'
 import { getWeatherQuery } from '../selectors'
-import { GetWeatherData } from '../managers'
+import { getWeatherData } from '../managers'
 
 export function* watchFetchCity() {
   yield takeEvery(fetchWeather, fetchCityAsync)
@@ -17,7 +17,7 @@ function* fetchCityAsync() {
     yield put(weatherIsLoading(true))
     const query = yield select(getWeatherQuery)
     const data = yield call(() => {
-      return GetWeatherData(query)
+      return getWeatherData(query)
     })
     yield put(weatherIsLoading(false))
     yield put(weatherFetchDataSuccess(data))

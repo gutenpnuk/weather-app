@@ -6,7 +6,7 @@ import {
   citiesFetchDataSuccess,
 } from '../actions'
 import { getCitiesQuery } from '../selectors'
-import { GetCitiesList } from '../managers'
+import { getCitiesList } from '../managers'
 
 export function* watchFetchData() {
   yield takeLatest(fetchCities, fetchDataAsync)
@@ -22,7 +22,7 @@ function* fetchDataAsync() {
       yield put(citiesFetchDataSuccess([]))
     } else {
       const data = yield call(() => {
-        return GetCitiesList(query)
+        return getCitiesList(query)
       })
       yield put(citiesIsLoading(false))
       yield put(citiesFetchDataSuccess(data))

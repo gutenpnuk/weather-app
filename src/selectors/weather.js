@@ -1,10 +1,30 @@
-export const getIsWeatherLoading = state => state.weather.isLoading
+import * as R from 'ramda'
 
-export const getHasWeatherErrored = state => state.weather.hasErrored
+const getWeather = R.prop('weather')
+const initConsolidatedWeather = () => []
 
-export const getWeatherData = state => state.weather.weatherData
+export const getIsWeatherLoading = R.pipe(
+  getWeather,
+  R.prop('isLoading'),
+)
 
-export const getWeatherQuery = state => state.weather.query
+export const getHasWeatherErrored = R.pipe(
+  getWeather,
+  R.prop('hasErrored'),
+)
 
-export const getConsolidatedWeather = state =>
-  getWeatherData(state).consolidatedWeather || []
+export const getWeatherData = R.pipe(
+  getWeather,
+  R.prop('weatherData'),
+)
+
+export const getWeatherQuery = R.pipe(
+  getWeather,
+  R.prop('query'),
+)
+
+export const getConsolidatedWeather = R.pipe(
+  getWeatherData,
+  R.prop('consolidatedWeather'),
+  R.when(R.isNil, initConsolidatedWeather),
+)

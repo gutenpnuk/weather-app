@@ -1,10 +1,8 @@
-const GetCitiesList = query =>
-  fetch(`api/location/search/?query=${query}`).then(res => {
-    if (res.status >= 200 && res.status < 300) {
-      return res.json()
-    } else {
-      throw new Error()
-    }
-  })
+import * as R from 'ramda'
 
-export default GetCitiesList
+const getCitiesList = R.pipeP(
+  query => fetch(`api/location/search/?query=${query}`),
+  res => res.json(),
+)
+
+export default getCitiesList
