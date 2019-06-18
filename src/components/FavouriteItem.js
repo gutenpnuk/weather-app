@@ -33,7 +33,7 @@ const LinkContainer = styled(Link)`
   }
 `
 
-const FavouriteItem = ({ woeid, fromFavourite, title }) => {
+const FavouriteItem = ({ woeid, removeFromFavourite, title }) => {
   const onClickFromFavourite = useCallback(() => {
     removeFromFavourite(woeid)
   }, [])
