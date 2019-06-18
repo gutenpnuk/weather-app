@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select } from 'redux-saga/effects'
+import { takeLatest, put, call, select, all } from 'redux-saga/effects'
 import {
   fetchCities,
   setCitiesErrored,
@@ -7,10 +7,6 @@ import {
 } from '../actions'
 import { getCitiesQuery } from '../selectors'
 import { getCitiesList } from '../managers'
-
-export function* watchFetchCities() {
-  yield takeLatest(fetchCities, fetchCitiesAsync)
-}
 
 function* fetchCitiesAsync() {
   try {
@@ -29,3 +25,11 @@ function* fetchCitiesAsync() {
     yield put(setCitiesErrored(true))
   }
 }
+
+const citiesSaga = function*() {
+  yield all([
+    takeLatest(fetchCities, fetchCitiesAsync)
+  ])
+}
+
+export default citiesSaga

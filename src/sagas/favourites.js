@@ -24,11 +24,11 @@ function* initialSaga() {
 }
 
 function* addLocalFavourites({ payload }) {
-  yield addToLocalFavourite(payload)
+  yield call(addToLocalFavourite, payload)
 }
 
 function* removeLocalFavourites({ payload }) {
-  yield removeFromLocalFavourite(payload)
+  yield call(removeFromLocalFavourite, payload)
 }
 
 const favouritesSaga = function*() {

@@ -1,4 +1,4 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects'
+import { takeEvery, put, call, select, all } from 'redux-saga/effects'
 import {
   fetchWeather,
   setWeatherLoading,
@@ -7,10 +7,6 @@ import {
 } from '../actions'
 import { getWeatherQuery } from '../selectors'
 import { getWeatherData } from '../managers'
-
-export function* watchFetchWeather() {
-  yield takeEvery(fetchWeather, fetchWeatherAsync)
-}
 
 function* fetchWeatherAsync() {
   try {
@@ -23,3 +19,11 @@ function* fetchWeatherAsync() {
     yield put(setWeatherErrored(true))
   }
 }
+
+const weatherSaga = function*() {
+  yield all([
+    takeEvery(fetchWeather, fetchWeatherAsync)
+  ])
+}
+
+export default weatherSaga
