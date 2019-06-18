@@ -3,7 +3,7 @@ import {
   addToLocalFavourite,
   removeFromLocalFavourite,
 } from '../repositories'
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery, all } from 'redux-saga/effects'
 import {
   getFavourites,
   setFavouriteErrored,
@@ -12,7 +12,7 @@ import {
   removeFromFavourite,
 } from '../actions'
 
-export function* initialSaga() {
+function* initialSaga() {
   try {
     yield put(setFavouriteLoading(true))
     const data = yield call(getFavourite)
@@ -23,14 +23,6 @@ export function* initialSaga() {
   }
 }
 
-export function* watchAddedFavourite() {
-  yield takeEvery(addToFavourite, addLocalFavourites)
-}
-
-export function* watchRemovedFavourite() {
-  yield takeEvery(removeFromFavourite, removeLocalFavourites)
-}
-
 function* addLocalFavourites({ payload }) {
   yield addToLocalFavourite(payload)
 }
@@ -38,3 +30,13 @@ function* addLocalFavourites({ payload }) {
 function* removeLocalFavourites({ payload }) {
   yield removeFromLocalFavourite(payload)
 }
+
+const favouritesSaga = function*() {
+  yield all([
+    initialSaga(),
+    takeEvery(addToFavourite, addLocalFavourites),
+    takeEvery(removeFromFavourite, removeLocalFavourites),
+  ])
+}
+
+export default favouritesSaga

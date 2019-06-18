@@ -26,7 +26,7 @@ const Title = styled.p`
   color: #2374fc;
 `
 
-function CityDailyWeather({
+const CityDailyWeather = ({
   applicableDate,
   weatherStateAbbr,
   weatherStateName,
@@ -34,7 +34,7 @@ function CityDailyWeather({
   minTemp,
   windDirection,
   windSpeed,
-}) {
+}) => {
   return (
     <MainContainer>
       <Title>{applicableDate}</Title>

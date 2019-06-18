@@ -4,10 +4,14 @@ export {
   getAllCities,
   getCitiesQuery,
   getCitiesFromFavourite,
+} from './cities'
+
+export {
   getFilteredFavourites,
   getFavouriteIsLoading,
   getFavouriteHasErrored,
-} from './cities'
+  getFavouritesById,
+} from './favourites'
 
 export {
   getIsWeatherLoading,

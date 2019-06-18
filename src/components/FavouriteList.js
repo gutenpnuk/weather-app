@@ -19,13 +19,13 @@ const FilterContainer = styled.input`
   padding: 3px 10px;
 `
 
-function FavouriteList({
+const FavouriteList = ({
   setFilter,
   items,
   removeFromFavourite,
   hasErrored,
   isLoading,
-}) {
+}) => {
   const onChangeFilter = useCallback(({ target: { value } }) => {
     setFilter(value)
   })

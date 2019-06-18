@@ -19,13 +19,13 @@ const NameForm = styled.input`
   padding: 3px 10px;
 `
 
-function CitiesList({
+const CitiesList = ({
   fetchCities,
   hasErrored,
   isLoading,
   items,
   addToFavourite,
-}) {
+}) => {
   const onChangeForm = useCallback(({ target: { value } }) => {
     fetchCities(value)
   })

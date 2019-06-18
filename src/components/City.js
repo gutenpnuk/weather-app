@@ -19,14 +19,14 @@ const Loader = styled.p`
   font-family: Arial, sans-serif;
 `
 
-function City({
+const City = ({
   weatherData,
   hasErrored,
   isLoading,
   weather,
   fetchWeather,
   match,
-}) {
+}) => {
   useEffect(() => {
     fetchWeather(match.params.id)
   }, [])

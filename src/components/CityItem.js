@@ -37,7 +37,7 @@ const LinkContainer = styled(Link)`
   }
 `
 
-function CityItem({ woeid, title, toFavourite, isDisabled }) {
+const CityItem = ({ woeid, title, toFavourite, isDisabled }) => {
   const onClickToFavourite = useCallback(() => {
     toFavourite({ woeid, title })
   })

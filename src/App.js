@@ -13,7 +13,7 @@ const MainContainer = styled.div`
   margin: 0 auto;
 `
 
-function App() {
+const App = () => {
   return (
     <MainContainer>
       <Provider store={store}>
