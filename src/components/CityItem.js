@@ -40,7 +40,7 @@ const LinkContainer = styled(Link)`
 const CityItem = ({ woeid, title, toFavourite, isDisabled }) => {
   const onClickToFavourite = useCallback(() => {
     toFavourite({ woeid, title })
-  })
+  }, [])
   return (
     <MainContainer>
       <TitleContainer>

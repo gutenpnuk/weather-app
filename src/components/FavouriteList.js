@@ -28,7 +28,7 @@ const FavouriteList = ({
 }) => {
   const onChangeFilter = useCallback(({ target: { value } }) => {
     setFilter(value)
-  })
+  }, [])
   return (
     <MainContainer>
       <FilterContainer
@@ -44,7 +44,7 @@ const FavouriteList = ({
         items.map(item => (
           <FavouriteItem
             key={item.woeid}
-            fromFavourite={removeFromFavourite}
+            removeFromFavourite={removeFromFavourite}
             {...item}
           />
         ))

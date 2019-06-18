@@ -35,8 +35,8 @@ const LinkContainer = styled(Link)`
 
 const FavouriteItem = ({ woeid, fromFavourite, title }) => {
   const onClickFromFavourite = useCallback(() => {
-    fromFavourite(woeid)
-  })
+    removeFromFavourite(woeid)
+  }, [])
   return (
     <MainContainer>
       <TitleContainer>

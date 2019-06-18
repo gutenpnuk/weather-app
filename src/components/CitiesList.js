@@ -28,7 +28,7 @@ const CitiesList = ({
 }) => {
   const onChangeForm = useCallback(({ target: { value } }) => {
     fetchCities(value)
-  })
+  }, [])
 
   return (
     <Main>
