@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import CityDailyWeather from './CityDailyWeather'
 import styled from 'styled-components'
-import * as R from 'ramda'
 
 const Main = styled.div`
   display: flex;
@@ -20,18 +19,17 @@ const Loader = styled.p`
   font-family: Arial, sans-serif;
 `
 
-const City = ({
+function City({
   weatherData,
   hasErrored,
   isLoading,
   weather,
   fetchWeather,
   match,
-}) => {
+}) {
   useEffect(() => {
     fetchWeather(match.params.id)
-  }, [fetchWeather, match.params.id])
-
+  }, [])
   return (
     <div>
       {hasErrored ? (
@@ -41,7 +39,9 @@ const City = ({
       ) : (
         <Main>
           <Title>{weatherData.title}</Title>
-          {R.map(item => <CityDailyWeather key={item.id} {...item} />)(weather)}
+          {weather.map(item => (
+            <CityDailyWeather key={item.id} {...item} />
+          ))}
         </Main>
       )}
     </div>

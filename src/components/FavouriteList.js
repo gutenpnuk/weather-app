@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import FavouriteItem from './FavouriteItem'
 import styled from 'styled-components'
-import * as R from 'ramda'
 
-const Main = styled.div`
+const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto 15px auto;
   font-family: Arial, sans-serif;
 `
-const NameForm = styled.input`
+const FilterContainer = styled.input`
   margin: 20px;
   width: 200px;
   height: 20px;
@@ -20,36 +19,37 @@ const NameForm = styled.input`
   padding: 3px 10px;
 `
 
-const FavouriteList = ({
+function FavouriteList({
   setFilter,
   items,
   removeFromFavourite,
   hasErrored,
   isLoading,
-}) => {
+}) {
+  const onChangeFilter = useCallback(({ target: { value } }) => {
+    setFilter(value)
+  })
   return (
-    <Main>
-      <NameForm
+    <MainContainer>
+      <FilterContainer
         placeholder="Search"
         type="text"
-        onChange={({ target: { value } }) => {
-          setFilter(value)
-        }}
+        onChange={onChangeFilter}
       />
       {hasErrored ? (
         <p>Error</p>
       ) : isLoading ? (
         <p>Loading</p>
       ) : (
-        R.map(item => (
+        items.map(item => (
           <FavouriteItem
             key={item.woeid}
-            {...item}
             fromFavourite={removeFromFavourite}
+            {...item}
           />
-        ))(items)
+        ))
       )}
-    </Main>
+    </MainContainer>
   )
 }
 

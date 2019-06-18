@@ -6,7 +6,7 @@ import { CitiesList, FavouriteList, City } from './containers'
 import { Header } from './components'
 import styled from 'styled-components'
 
-const MainFlex = styled.div`
+const MainContainer = styled.div`
   display: flex;
   flex-flow: column wrap;
   align-items: center;
@@ -15,7 +15,7 @@ const MainFlex = styled.div`
 
 function App() {
   return (
-    <MainFlex>
+    <MainContainer>
       <Provider store={store}>
         <>
           <Router>
@@ -26,7 +26,7 @@ function App() {
           </Router>
         </>
       </Provider>
-    </MainFlex>
+    </MainContainer>
   )
 }
 

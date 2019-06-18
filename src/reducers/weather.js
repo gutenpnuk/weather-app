@@ -2,40 +2,45 @@ import { handleAction } from 'redux-actions'
 import {
   setWeatherLoading,
   setWeatherErrored,
-  weatherFetchDataSuccess,
+  setWeatherData,
   fetchWeather,
 } from '../actions'
 import { combineReducers } from 'redux'
+import * as R from 'ramda'
 
 const isLoading = handleAction(
   setWeatherLoading,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   false,
 )
 
 const hasErrored = handleAction(
   setWeatherErrored,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   false,
 )
 
 const query = handleAction(
   fetchWeather,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   '',
 )
 
 const weatherData = handleAction(
-  weatherFetchDataSuccess,
-  (state, { payload }) => {
-    return payload
-  },
+  setWeatherData,
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   {},
 )
 

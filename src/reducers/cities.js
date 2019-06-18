@@ -4,7 +4,7 @@ import {
   fetchCities,
   setCitiesLoading,
   setCitiesErrored,
-  citiesFetchDataSuccess,
+  setCitiesList,
   addToFavourite,
   removeFromFavourite,
   setFilter,
@@ -12,75 +12,86 @@ import {
   setFavouriteLoading,
   setFavouriteErrored,
 } from '../actions'
+import * as R from 'ramda'
 
 const isLoading = handleAction(
   setCitiesLoading,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   false,
 )
 
 const hasErrored = handleAction(
   setCitiesErrored,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   false,
 )
 
 const all = handleAction(
-  citiesFetchDataSuccess,
-  (state, { payload }) => {
-    return payload
-  },
+  setCitiesList,
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   [],
 )
 
 const query = handleAction(
   fetchCities,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   '',
 )
 
 const favourites = handleActions(
   {
-    [addToFavourite]: (state, { payload }) => {
-      return [...state, payload]
-    },
-    [removeFromFavourite]: (state, { payload }) => {
-      return state.filter(item => item.woeid !== payload)
-    },
-    [getFavourites]: (state, { payload }) => {
-      return payload
-    },
+    [addToFavourite]: (state, { payload }) => R.append(payload, state),
+    [removeFromFavourite]: (state, { payload }) =>
+      R.reject(
+        R.pipe(
+          R.prop('woeid'),
+          R.equals(payload),
+        ),
+      )(state),
+    [getFavourites]: R.pipe(
+      R.nthArg(1),
+      R.prop('payload'),
+    ),
   },
   [],
 )
 
 const isFavouriteLoading = handleAction(
   setFavouriteLoading,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   false,
 )
 
 const hasFavouriteErrored = handleAction(
   setFavouriteErrored,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   false,
 )
 
 const activeFilter = handleAction(
   setFilter,
-  (state, { payload }) => {
-    return payload
-  },
+  R.pipe(
+    R.nthArg(1),
+    R.prop('payload'),
+  ),
   '',
 )
 

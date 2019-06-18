@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import CityItem from './CityItem'
 import styled from 'styled-components'
-import * as R from 'ramda'
 
 const Main = styled.div`
   display: flex;
@@ -20,28 +19,28 @@ const NameForm = styled.input`
   padding: 3px 10px;
 `
 
-const CitiesList = ({
+function CitiesList({
   fetchCities,
   hasErrored,
   isLoading,
   items,
   addToFavourite,
-}) => {
+}) {
+  const onChangeForm = useCallback(({ target: { value } }) => {
+    fetchCities(value)
+  })
+
   return (
     <Main>
-      <NameForm
-        placeholder="Search"
-        type="text"
-        onChange={({ target: { value } }) => fetchCities(value)}
-      />
+      <NameForm placeholder="Search" type="text" onChange={onChangeForm} />
       {hasErrored ? (
         <p>Error</p>
       ) : isLoading ? (
         <p>Loading</p>
       ) : (
-        R.map(item => (
-          <CityItem key={item.woeid} {...item} toFavourite={addToFavourite} />
-        ))(items)
+        items.map(item => (
+          <CityItem key={item.woeid} toFavourite={addToFavourite} {...item} />
+        ))
       )}
     </Main>
   )

@@ -6,16 +6,20 @@ export const getFavourite = () =>
 export const setFavourite = citiesList =>
   (localStorage.favouriteItems = JSON.stringify(citiesList))
 
-export const addToLocalFavourite = payload => {
-  const prevFavoutire = getFavourite()
-  const nextFavourite = [...prevFavoutire, payload]
-  setFavourite(nextFavourite)
+export const addToLocalFavourite = city => {
+  const favouriteList = getFavourite()
+  const updatedFavouriteList = [...favouriteList, city]
+  setFavourite(updatedFavouriteList)
 }
 
-export const removeFromLocalFavourite = payload => {
-  const prevFavoutire = getFavourite()
-  const nextFavourite = R.filter(item => {
-    return item.woeid !== payload
-  }, prevFavoutire)
-  setFavourite(nextFavourite)
+export const removeFromLocalFavourite = id => {
+  const favouriteList = getFavourite()
+  const updatedFavouriteList = R.reject(
+    R.pipe(
+      R.prop('woeid'),
+      R.equals(id),
+    ),
+    favouriteList,
+  )
+  setFavourite(updatedFavouriteList)
 }

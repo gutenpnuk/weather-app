@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const MainItem = styled.div`
+const MainContainer = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -13,7 +12,6 @@ const MainItem = styled.div`
   margin: 0 10px 3px;
 `
 const Button = styled.button`
-  flex-grow: 0, 9;
   background: white;
   color: #333;
   margin: 7px;
@@ -21,31 +19,31 @@ const Button = styled.button`
   border: 1px solid #333;
   border-radius: 2px;
 `
-const TitlePlaceholder = styled.p`
+const TitleContainer = styled.p`
   flex-grow: 1;
   margin: 5px;
+`
+const LinkContainer = styled(Link)`
+  text-decoration: none;
+  color: #2374fc;
 
-  .Link {
-    text-decoration: none;
-    color: #2374fc;
-
-    :hover {
-      text-decoration: underline;
-      color: #1751b2;
-    }
+  :hover {
+    text-decoration: underline;
+    color: #1751b2;
   }
 `
 
-const FavouriteItem = ({ woeid, fromFavourite, title }) => {
+function FavouriteItem({ woeid, fromFavourite, title }) {
+  const onClickFromFavourite = useCallback(() => {
+    fromFavourite(woeid)
+  })
   return (
-    <MainItem>
-      <TitlePlaceholder>
-        <Link className="Link" to={`/api/${woeid}`}>
-          {title}
-        </Link>
-      </TitlePlaceholder>
-      <Button onClick={() => fromFavourite(woeid)}>From favourite</Button>
-    </MainItem>
+    <MainContainer>
+      <TitleContainer>
+        <LinkContainer to={`/api/${woeid}`}>{title}</LinkContainer>
+      </TitleContainer>
+      <Button onClick={onClickFromFavourite}>From favourite</Button>
+    </MainContainer>
   )
 }
 

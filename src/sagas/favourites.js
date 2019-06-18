@@ -15,9 +15,7 @@ import {
 export function* initialSaga() {
   try {
     yield put(setFavouriteLoading(true))
-    const data = yield call(() => {
-      return getFavourite()
-    })
+    const data = yield call(getFavourite)
     yield put(setFavouriteLoading(false))
     yield put(getFavourites(data))
   } catch (error) {

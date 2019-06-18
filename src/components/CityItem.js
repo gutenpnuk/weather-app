@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const MainItem = styled.div`
+const MainContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 300px;
@@ -12,7 +11,6 @@ const MainItem = styled.div`
   margin: 0 10px 3px;
 `
 const Button = styled.button`
-  flex-grow: 0, 9;
   background: white;
   color: #333;
   margin: 7px;
@@ -25,36 +23,33 @@ const Button = styled.button`
     border: 1px solid #999;
   }
 `
-const TitlePlaceholder = styled.p`
+const TitleContainer = styled.p`
   flex-grow: 1;
   margin: 5px;
+`
+const LinkContainer = styled(Link)`
+  text-decoration: none;
+  color: #2374fc;
 
-  .Link {
-    text-decoration: none;
-    color: #2374fc;
-
-    :hover {
-      text-decoration: underline;
-      color: #1751b2;
-    }
+  :hover {
+    text-decoration: underline;
+    color: #1751b2;
   }
 `
 
-const CityItem = ({ woeid, title, toFavourite, isDisabled }) => {
+function CityItem({ woeid, title, toFavourite, isDisabled }) {
+  const onClickToFavourite = useCallback(() => {
+    toFavourite({ woeid, title })
+  })
   return (
-    <MainItem>
-      <TitlePlaceholder>
-        <Link className="Link" to={`/api/${woeid}`}>
-          {title}
-        </Link>
-      </TitlePlaceholder>
-      <Button
-        disabled={isDisabled}
-        onClick={() => toFavourite({ woeid, title })}
-      >
+    <MainContainer>
+      <TitleContainer>
+        <LinkContainer to={`/api/${woeid}`}>{title}</LinkContainer>
+      </TitleContainer>
+      <Button disabled={isDisabled} onClick={onClickToFavourite}>
         To favourite
       </Button>
-    </MainItem>
+    </MainContainer>
   )
 }
 

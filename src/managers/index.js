@@ -1,2 +1,2 @@
-export { getWeatherData } from './GetWeatherData'
-export { getCitiesList } from './GetCitiesList'
+export { getWeatherData } from './Weather'
+export { getCitiesList } from './Cities'

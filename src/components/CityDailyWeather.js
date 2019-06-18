@@ -1,34 +1,32 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
+import styled from 'styled-components'
 
-const Main = styled.div`
+const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
   margin: 0 40px;
   font-family: Arial, sans-serif;
-  flex-shrink: 15;
 `
-const FlexImg = styled.div`
+const WeatherHeader = styled.div`
+  display: flex;
+`
+const ImageContainer = styled.img`
+  margin-right: 10px;
+`
+const WindContainer = styled.div`
   display: flex;
   flex-direction: row;
-  .img {
-    margin-right: 10px;
-  }
 `
-const FlexWind = styled.div`
-  display: flex;
-  flex-direction: row;
-  .arrow {
-    margin-right: 10px;
-    transform: rotate(${props => props.theme.degs}deg);
-  }
+const Arrow = styled.p`
+  margin-right: 10px;
+  transform: rotate(${props => props.theme.degs}deg);
 `
 const Title = styled.p`
   color: #2374fc;
 `
 
-const CityDailyWeather = ({
+function CityDailyWeather({
   applicableDate,
   weatherStateAbbr,
   weatherStateName,
@@ -36,29 +34,26 @@ const CityDailyWeather = ({
   minTemp,
   windDirection,
   windSpeed,
-}) => {
+}) {
   return (
-    <Main>
+    <MainContainer>
       <Title>{applicableDate}</Title>
-      <FlexImg>
-        <img
-          className="img"
+      <WeatherHeader>
+        <ImageContainer
           src={`/static/img/weather/ico/${weatherStateAbbr}.ico`}
           width="30"
           height="30"
           alt={weatherStateAbbr}
         />
         <p>{weatherStateName}</p>
-      </FlexImg>
+      </WeatherHeader>
       <p>Max: {Math.round(maxTemp)}&#8451;</p>
       <p>Min: {Math.round(minTemp)}&#8451;</p>
-      <ThemeProvider theme={{ degs: windDirection }}>
-        <FlexWind>
-          <p className="arrow">&#x2191;</p>
-          <p>{Math.round(windSpeed)}mph</p>
-        </FlexWind>
-      </ThemeProvider>
-    </Main>
+      <WindContainer>
+        <Arrow theme={{ degs: windDirection }}>&#x2191;</Arrow>
+        <p>{Math.round(windSpeed)}mph</p>
+      </WindContainer>
+    </MainContainer>
   )
 }
 
